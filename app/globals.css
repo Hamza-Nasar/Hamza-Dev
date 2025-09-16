@@ -1,8 +1,35 @@
-@import "tailwindcss";
-@import "tailwindcss/preflight";
-@tailwind utilities;
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
 
-/* add small global styles if you want */
+
+@layer base {
+  html, body {
+    height: 100%;
+  }
+  body {
+    @apply bg-black text-white;
+  }
+}
+
+
+@layer components {
+
+  .btn-primary {
+    @apply inline-block px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white;
+  }
+}
+
+
+@import "tailwindcss/utilities.css" layer(utilities);
+
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-thumb { background: #6366f1; border-radius: 4px; }
+
+
+
+
 body { background: #000; }
 
 html {

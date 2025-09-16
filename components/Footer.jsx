@@ -6,7 +6,7 @@ import { Link } from 'react-scroll';
 export default function Footer() {
     const socials = [
         { icon: <FaGithub />, link: "https://github.com/hamza-nasar" },
-        { icon: <FaLinkedin />, link: "https://linkedin.com/in/hamzanasar144" },
+        { icon: <FaLinkedin />, link: "https://www.linkedin.com/in/hamza-nasar-1363a4337" },
         { icon: <FaTwitter />, link: "https://twitter.com/hamzanasar144" },
     ];
 
@@ -15,11 +15,15 @@ export default function Footer() {
         { name: "About", to: "about" },
         { name: "Skills", to: "skills" },
         { name: "Services", to: "services" },
+    ];
+    
+    const menuItems2 = [
         { name: "Projects", to: "projects" },
         { name: "Timeline", to: "timeline" },
         { name: "Testimonials", to: "testimonials" },
         { name: "Contact", to: "contact" },
-    ];
+
+    ]
 
     return (
         <footer className="bg-zinc-900 text-white py-16">
@@ -46,6 +50,7 @@ export default function Footer() {
                     transition={{ duration: 0.6, delay: 0.1 }}
                 >
                     <h3 className="text-xl font-bold mb-4">Quick Links</h3>
+                    <div className="qu flex gap-8 md:gap-6">
                     <ul className="space-y-2">
                         {menuItems.map((item, idx) => (
                             <li key={idx}>
@@ -61,6 +66,22 @@ export default function Footer() {
                             </li>
                         ))}
                     </ul>
+                    <ul className="space-y-2 grid-cols-1 gap-1">
+                        {menuItems2.map((item, idx) => (
+                            <li key={idx}>
+                                <Link
+                                    to={item.to}
+                                    smooth={true}
+                                    offset={-70}
+                                    duration={500}
+                                    className="cursor-pointer text-gray-400 hover:text-indigo-500 transition"
+                                >
+                                    {item.name}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                    </div>
                 </motion.div>
 
                 {/* Contact Info */}
