@@ -1,93 +1,77 @@
-"use client";
-import { useState } from "react";
-import { motion } from "framer-motion";
+'use client';
+import { motion } from 'framer-motion';
+import { useState } from 'react';
 
-export default function ContactForm() {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [content, setContent] = useState("");
-    const [status, setStatus] = useState("");
+export default function Contact() {
+    const [form, setForm] = useState({ name: '', email: '', message: '' });
 
-    async function handleSubmit(e) {
+    const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+
+    const handleSubmit = (e) => {
         e.preventDefault();
-        setStatus("sending");
-        try {
-            const res = await fetch("/api/contact", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, email, content }),
-            });
-            if (res.ok) {
-                setStatus("sent");
-                setName("");
-                setEmail("");
-                setContent("");
-            } else {
-                setStatus("error");
-            }
-        } catch (err) {
-            console.error(err);
-            setStatus("error");
-        }
-    }
+        alert(`Thank you ${form.name}! Your message has been sent.`);
+        setForm({ name: '', email: '', message: '' });
+    };
 
     return (
-        <section id="contact" className="py-20 bg-gradient-to-b from-zinc-900 via-black to-zinc-900">
+        <section id="contact" className="py-20 bg-gradient-to-br from-black via-zinc-900 to-black text-white">
             <div className="max-w-3xl mx-auto px-6">
                 <motion.h2
-                    initial={{ opacity: 0, y: 30 }}
+                    className="text-4xl font-bold text-center mb-12"
+                    initial={{ opacity: 0, y: -50 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="text-4xl font-bold text-center mb-10"
+                    transition={{ duration: 0.8 }}
                 >
-                    Get in Touch
+                    Contact Me
                 </motion.h2>
 
                 <motion.form
                     onSubmit={handleSubmit}
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.7 }}
-                    className="bg-gray-900/70 backdrop-blur rounded-2xl shadow-xl p-8 space-y-5"
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    className="flex flex-col gap-4 bg-gray-800 p-8 rounded-3xl shadow-2xl hover:shadow-indigo-600/40 transition-all duration-500"
                 >
-                    <input
+                    <motion.input
+                        type="text"
+                        name="name"
+                        placeholder="Your Name"
+                        value={form.name}
+                        onChange={handleChange}
                         required
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        placeholder="Your name"
-                        className="w-full p-3 rounded-xl bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+                        whileFocus={{ scale: 1.02, borderColor: '#6366f1', boxShadow: '0 0 10px rgba(99,102,241,0.5)' }}
+                        className="p-3 rounded-xl bg-gray-700 border border-gray-600 focus:outline-none transition-all"
                     />
-                    <input
-                        required
+                    <motion.input
                         type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Email"
-                        className="w-full p-3 rounded-xl bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-                    />
-                    <textarea
+                        name="email"
+                        placeholder="Your Email"
+                        value={form.email}
+                        onChange={handleChange}
                         required
-                        value={content}
-                        onChange={(e) => setContent(e.target.value)}
-                        placeholder="Message"
-                        className="w-full p-3 rounded-xl bg-gray-800 text-white placeholder-gray-400 h-32 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+                        whileFocus={{ scale: 1.02, borderColor: '#6366f1', boxShadow: '0 0 10px rgba(99,102,241,0.5)' }}
+                        className="p-3 rounded-xl bg-gray-700 border border-gray-600 focus:outline-none transition-all"
                     />
-
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                        <button
-                            type="submit"
-                            className="px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-xl text-white font-semibold hover:from-indigo-600 hover:to-purple-600 transition"
-                        >
-                            Send Message
-                        </button>
-                        <div className="text-sm text-gray-300">
-                            {status === "sending" && "Sending..."}
-                            {status === "sent" && "✅ Message sent successfully!"}
-                            {status === "error" && "❌ Error, try again."}
-                        </div>
-                    </div>
+                    <motion.textarea
+                        name="message"
+                        placeholder="Your Message"
+                        value={form.message}
+                        onChange={handleChange}
+                        required
+                        rows={5}
+                        whileFocus={{ scale: 1.02, borderColor: '#6366f1', boxShadow: '0 0 10px rgba(99,102,241,0.5)' }}
+                        className="p-3 rounded-xl bg-gray-700 border border-gray-600 focus:outline-none transition-all"
+                    />
+                    <motion.button
+                        type="submit"
+                        whileHover={{ scale: 1.05, backgroundColor: '#4f46e5' }}
+                        whileTap={{ scale: 0.95 }}
+                        className="bg-indigo-500 hover:bg-indigo-600 px-6 py-3 rounded-xl font-semibold mt-4 transition-all duration-300"
+                    >
+                        Send Message
+                    </motion.button>
                 </motion.form>
             </div>
         </section>

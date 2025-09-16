@@ -1,47 +1,54 @@
-"use client";
-import { motion } from "framer-motion";
+    'use client'
+    import { motion } from 'framer-motion'
+    import dynamic from 'next/dynamic'
 
-export default function Hero() {
-    return (
-        <section
-            id="hero"
-            className="relative h-screen flex items-center justify-center bg-gradient-to-br from-purple-900 via-indigo-900 to-black text-white overflow-hidden"
-        >
-            {/* Background animated gradient circles */}
-            <motion.div
-                className="absolute -top-32 -left-32 w-96 h-96 bg-purple-700 rounded-full mix-blend-screen blur-3xl opacity-30"
-                animate={{ x: [0, 40, -40, 0], y: [0, -30, 30, 0] }}
-                transition={{ repeat: Infinity, duration: 12 }}
-            />
-            <motion.div
-                className="absolute bottom-0 right-0 w-96 h-96 bg-indigo-700 rounded-full mix-blend-screen blur-3xl opacity-20"
-                animate={{ x: [0, -40, 40, 0], y: [0, 20, -20, 0] }}
-                transition={{ repeat: Infinity, duration: 14 }}
-            />
+    // Lottie dynamically load karo, server-side ignore
+    const Player = dynamic(
+        () => import('@lottiefiles/react-lottie-player').then(mod => mod.Player),
+        { ssr: false }
+    )
 
-            <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="text-center px-6 z-10"
+    export default function Hero() {
+        return (
+            <section
+                id="hero"
+                className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-indigo-900 via-indigo-950 to-black text-white px-6 md:px-16"
             >
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-                    Transform Your Business <br />
-                    <span className="text-indigo-400">With Modern Web Apps</span>
-                </h1>
-                <p className="text-lg md:text-xl text-gray-300 mb-8">
-                    Full-Stack Development • AI Solutions • Scalable Web Apps
-                </p>
-                <motion.a
-                    href="#contact"
-                    initial={{ scale: 0.9, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ delay: 0.8, duration: 0.5 }}
-                    className="inline-block px-8 py-4 bg-indigo-600 text-white rounded-xl hover:bg-indigo-500 transition shadow-lg"
+                {/* Text + Button */}
+                <motion.div
+                    initial={{ y: 50, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 1 }}
+                    className="flex flex-col items-center text-center"
                 >
-                    Get Free Assessment
-                </motion.a>
-            </motion.div>
-        </section>
-    );
-}
+                    <h1 className="text-xl md:text-6xl font-bold mb-6 leading-tight">
+                        I am Hamza Nasar
+                    </h1>
+                    <p className="text-xl md:text-xl mb-8 text-gray-300">
+                        Full Stack Developer | Node.js | Next.js | MongoDB | React
+                    </p>
+                    <a
+                        href="#contact"
+                        className="inline-block px-8 py-4 bg-indigo-500 rounded-xl hover:bg-indigo-600 transition-all transform hover:scale-105 font-semibold"
+                    >
+                        Contact Me
+                    </a>
+                </motion.div>
+
+                {/* Animation */}
+                <motion.div
+                    initial={{ y: 50, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 1, delay: 0.3 }}
+                    className="mt-10 w-80 md:w-96"
+                >
+                    {/* <Player
+                        autoplay
+                        loop
+                        src="/assets/hero-animation.json"
+                        style={{ width: '100%', height: '100%' }}
+                    /> */}
+                </motion.div>
+            </section>
+        )
+    }

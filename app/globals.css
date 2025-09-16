@@ -1,10 +1,13 @@
 @import "tailwindcss";
-@tailwind base;
-@tailwind components;
+@import "tailwindcss/preflight";
 @tailwind utilities;
 
 /* add small global styles if you want */
 body { background: #000; }
+
+html {
+  scroll-behavior: smooth;
+}
 
 
 :root {
