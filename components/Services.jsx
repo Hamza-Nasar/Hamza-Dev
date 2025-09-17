@@ -1,11 +1,39 @@
 'use client'
 import { motion } from 'framer-motion'
-import { Wrench, Layers, Cloud } from 'lucide-react'
+import { Wrench, Layers, Cloud, CreditCard, Cpu } from 'lucide-react'
 
 const services = [
-    { title: "Custom Web Apps", icon: <Wrench size={48} />, desc: "Tailored Next.js web applications to scale your business." },
-    { title: "Full-Stack APIs", icon: <Layers size={48} />, desc: "Secure and fast REST/GraphQL APIs with databases." },
-    { title: "Cloud Deployment", icon: <Cloud size={48} />, desc: "Deploy & manage apps on Vercel, AWS, and DigitalOcean." },
+    {
+        title: "Custom Web Apps & Dashboards",
+        icon: <Wrench size={48} className="text-purple-400" />,
+        desc: "Responsive, SEO-friendly Next.js dashboards and portals tailored to your business workflows."
+    },
+    {
+        title: "Full-Stack APIs & Integrations",
+        icon: <Layers size={48} className="text-blue-400" />,
+        desc: "Secure REST/GraphQL APIs with Node.js, Express, MongoDB, plus third-party integrations."
+    },
+    {
+        title: "Cloud & DevOps Deployment",
+        icon: <Cloud size={48} className="text-green-400" />,
+        desc: "Scalable deployments on Vercel, AWS, DigitalOcean and CI/CD pipelines."
+    },
+    {
+        title: "Payment & SaaS Platforms",
+        icon: <CreditCard size={48} className="text-yellow-400" />,
+        desc: "Stripe/EasyPaisa/JazzCash integrations, subscription billing and user management."
+    },
+    {
+        title: "AI-Powered Applications",
+        icon: <Cpu size={48} className="text-pink-400" />,
+        desc: "Integrate OpenAI, chatbots, or content generation directly into your web apps."
+    },
+    {
+        title: "Mobile-Friendly Progressive Web Apps",
+        icon: <Wrench size={48} className="text-orange-400" />,
+        desc: "Fast, offline-ready PWAs built with React/Next.js for a native-like user experience on all devices."
+    }
+
 ]
 
 export default function Services() {

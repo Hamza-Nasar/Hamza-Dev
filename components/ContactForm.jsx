@@ -1,79 +1,126 @@
-'use client';
-import { motion } from 'framer-motion';
-import { useState } from 'react';
+'use client'
+import { motion } from 'framer-motion'
+import { Mail, Phone, MapPin, Send } from 'lucide-react'
+import { useState } from 'react'
+import Swal from 'sweetalert2'
+import 'sweetalert2/dist/sweetalert2.min.css'
 
 export default function Contact() {
-    const [form, setForm] = useState({ name: '', email: '', message: '' });
+    const [form, setForm] = useState({ name: '', email: '', message: '' })
 
-    const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+    const handleChange = (e) =>
+        setForm({ ...form, [e.target.name]: e.target.value })
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        alert(`Thank you ${form.name}! Your message has been sent.`);
-        setForm({ name: '', email: '', message: '' });
-    };
+        e.preventDefault()
+        // do your backend call here if needed…
+        Swal.fire({
+            icon: 'success',
+            title: 'Message Sent!',
+            text: `Thank you ${form.name}, I’ll get back to you soon 😊`,
+            showConfirmButton: false,
+            timer: 3000,
+            background: '#1f2937',
+            color: '#fff'
+        })
+        setForm({ name: '', email: '', message: '' })
+    }
 
     return (
-        <section id="contact" className="py-20 bg-gradient-to-br from-black via-zinc-900 to-black text-white">
-            <div className="max-w-3xl mx-auto px-6">
+        <section
+            id='contact'
+            className='py-20 bg-gradient-to-br from-gray-900 to-indigo-950 text-white'
+        >
+            <div className='max-w-6xl mx-auto px-6'>
                 <motion.h2
-                    className="text-4xl font-bold text-center mb-12"
-                    initial={{ opacity: 0, y: -50 }}
+                    initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.8 }}
+                    className='text-4xl font-bold text-center mb-12'
                 >
-                    Contact Me
+                    Let’s Work Together
                 </motion.h2>
 
-                <motion.form
-                    onSubmit={handleSubmit}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
-                    className="flex flex-col gap-4 bg-gray-800 p-8 rounded-3xl shadow-2xl hover:shadow-indigo-600/40 transition-all duration-500"
-                >
-                    <motion.input
-                        type="text"
-                        name="name"
-                        placeholder="Your Name"
-                        value={form.name}
-                        onChange={handleChange}
-                        required
-                        whileFocus={{ scale: 1.02, borderColor: '#6366f1', boxShadow: '0 0 10px rgba(99,102,241,0.5)' }}
-                        className="p-3 rounded-xl bg-gray-700 border border-gray-600 focus:outline-none transition-all"
-                    />
-                    <motion.input
-                        type="email"
-                        name="email"
-                        placeholder="Your Email"
-                        value={form.email}
-                        onChange={handleChange}
-                        required
-                        whileFocus={{ scale: 1.02, borderColor: '#6366f1', boxShadow: '0 0 10px rgba(99,102,241,0.5)' }}
-                        className="p-3 rounded-xl bg-gray-700 border border-gray-600 focus:outline-none transition-all"
-                    />
-                    <motion.textarea
-                        name="message"
-                        placeholder="Your Message"
-                        value={form.message}
-                        onChange={handleChange}
-                        required
-                        rows={5}
-                        whileFocus={{ scale: 1.02, borderColor: '#6366f1', boxShadow: '0 0 10px rgba(99,102,241,0.5)' }}
-                        className="p-3 rounded-xl bg-gray-700 border border-gray-600 focus:outline-none transition-all"
-                    />
-                    <motion.button
-                        type="submit"
-                        whileHover={{ scale: 1.05, backgroundColor: '#4f46e5' }}
-                        whileTap={{ scale: 0.95 }}
-                        className="bg-indigo-500 hover:bg-indigo-600 px-6 py-3 rounded-xl font-semibold mt-4 transition-all duration-300"
+                <div className='grid md:grid-cols-2 gap-12'>
+                    {/* Left Side – Info */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        className='space-y-6'
                     >
-                        Send Message
-                    </motion.button>
-                </motion.form>
+                        <p className='text-gray-300'>
+                            Have a project in mind or want to discuss an idea? Fill out the
+                            form or reach me directly:
+                        </p>
+                        <div className='flex items-center gap-4'>
+                            <Mail className='text-indigo-400' />
+                            <span>hamzanasar144@gmail.com</span>
+                        </div>
+                        <div className='flex items-center gap-4'>
+                            <Phone className='text-indigo-400' />
+                            <span>+92 308 8977132</span>
+                        </div>
+                        <div className='flex items-center gap-4'>
+                            <MapPin className='text-indigo-400' />
+                            <span>Karachi, Pakistan</span>
+                        </div>
+                    </motion.div>
+
+                    {/* Right Side – Form */}
+                    <motion.form
+                        onSubmit={handleSubmit}
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        className='bg-gray-800 rounded-2xl p-8 shadow-xl space-y-6'
+                    >
+                        <div>
+                            <label className='block mb-1 text-sm font-medium'>Name</label>
+                            <input
+                                type='text'
+                                name='name'
+                                value={form.name}
+                                onChange={handleChange}
+                                className='w-full p-3 rounded-lg bg-gray-900 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500'
+                                placeholder='Your name'
+                                required
+                            />
+                        </div>
+                        <div>
+                            <label className='block mb-1 text-sm font-medium'>Email</label>
+                            <input
+                                type='email'
+                                name='email'
+                                value={form.email}
+                                onChange={handleChange}
+                                className='w-full p-3 rounded-lg bg-gray-900 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500'
+                                placeholder='you@example.com'
+                                required
+                            />
+                        </div>
+                        <div>
+                            <label className='block mb-1 text-sm font-medium'>Message</label>
+                            <textarea
+                                rows={4}
+                                name='message'
+                                value={form.message}
+                                onChange={handleChange}
+                                className='w-full p-3 rounded-lg bg-gray-900 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500'
+                                placeholder='Tell me about your project...'
+                                required
+                            />
+                        </div>
+                        <button
+                            type='submit'
+                            className='flex items-center justify-center gap-2 w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3 px-6 rounded-lg transition'
+                        >
+                            <Send size={18} />
+                            Send Message
+                        </button>
+                    </motion.form>
+                </div>
             </div>
         </section>
-    );
+    )
 }

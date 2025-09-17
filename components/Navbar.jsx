@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-scroll'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false)
@@ -24,18 +24,21 @@ export default function Navbar() {
 
     return (
         <nav
-            className={`fixed top-0 left-0 w-full z-50 transition-colors ${scrolled ? 'bg-black/80 backdrop-blur-sm shadow-lg' : 'bg-transparent'
+            className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 ${scrolled
+                    ? 'bg-black/80 backdrop-blur-sm shadow-lg'
+                    : 'bg-transparent'
                 } text-white`}
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between h-16 items-center">
                     {/* Logo */}
                     <motion.div
-                        className="font-bold text-xl cursor-pointer hover:text-indigo-500 transition-colors"
-                        whileHover={{ scale: 1.05, color: '#6366F1' }}
-                        transition={{ duration: 0.3 }}
+                        whileHover={{ scale: 1.05 }}
+                        className="flex items-center gap-2 font-extrabold text-lg tracking-wide cursor-pointer"
                     >
-                        Hamza Nasar
+                        <span className="bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+                            Hamza Nasar
+                        </span>
                     </motion.div>
 
                     {/* Desktop menu */}
@@ -48,8 +51,8 @@ export default function Navbar() {
                                 smooth={true}
                                 offset={-70}
                                 duration={600}
-                                activeClass="text-indigo-400 border-b-2 border-indigo-400"
-                                className="px-1 pb-1 cursor-pointer transition-colors hover:text-indigo-400"
+                                activeClass="text-indigo-400"
+                                className="relative px-1 pb-1 cursor-pointer hover:text-indigo-400 transition-colors after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:h-0.5 after:w-0 after:bg-indigo-400 hover:after:w-full after:transition-all"
                             >
                                 {item.name}
                             </Link>
@@ -87,30 +90,33 @@ export default function Navbar() {
             </div>
 
             {/* Mobile dropdown */}
-            {isOpen && (
-                <motion.div
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="md:hidden bg-black/90 backdrop-blur text-center space-y-4 py-4"
-                >
-                    {menuItems.map((item, idx) => (
-                        <Link
-                            key={idx}
-                            to={item.to}
-                            spy={true}
-                            smooth={true}
-                            offset={-70}
-                            duration={600}
-                            activeClass="text-indigo-400 font-semibold"
-                            className="block cursor-pointer transition-colors hover:text-indigo-400"
-                            onClick={() => setIsOpen(false)}
-                        >
-                            {item.name}
-                        </Link>
-                    ))}
-                </motion.div>
-            )}
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.25 }}
+                        className="md:hidden bg-black/90 backdrop-blur text-center space-y-4 py-4"
+                    >
+                        {menuItems.map((item, idx) => (
+                            <Link
+                                key={idx}
+                                to={item.to}
+                                spy={true}
+                                smooth={true}
+                                offset={-70}
+                                duration={600}
+                                activeClass="text-indigo-400 font-semibold"
+                                className="block cursor-pointer transition-colors hover:text-indigo-400"
+                                onClick={() => setIsOpen(false)}
+                            >
+                                {item.name}
+                            </Link>
+                        ))}
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </nav>
     )
 }

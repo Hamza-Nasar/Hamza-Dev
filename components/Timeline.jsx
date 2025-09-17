@@ -1,16 +1,41 @@
 'use client'
 import { motion } from 'framer-motion'
-import { CalendarDays, Briefcase, GraduationCap } from 'lucide-react'
+import { CalendarDays, Briefcase, GraduationCap, Award } from 'lucide-react'
 
 const events = [
-    { icon: <GraduationCap className="w-6 h-6 text-purple-400" />, title: "BSc Computer Science", subtitle: "University of Karachi", date: "2019 – 2023", description: "Graduated with strong foundations in software engineering and web development." },
-    { icon: <Briefcase className="w-6 h-6 text-blue-400" />, title: "Full Stack Developer", subtitle: "Freelance / Remote", date: "2023 – Present", description: "Building scalable web apps (Node.js, Express, MongoDB, React, Next.js)." },
-    { icon: <CalendarDays className="w-6 h-6 text-green-400" />, title: "Upcoming Projects", subtitle: "Innovative SaaS products", date: "2025", description: "Currently working on advanced AI-powered and payment-enabled platforms." }
+    {
+        icon: <GraduationCap className="w-6 h-6 text-purple-400" />,
+        title: "BSc Computer Science",
+        subtitle: "University of Karachi",
+        date: "2023",
+        description: "Graduated with a strong foundation in software engineering, databases and full-stack web development."
+    },
+    {
+        icon: <Award className="w-6 h-6 text-yellow-400" />,
+        title: "MERN Stack Certification",
+        subtitle: "Online Bootcamp",
+        date: "2024",
+        description: "Completed intensive MERN stack training covering React, Node.js, MongoDB, Express and deployment."
+    },
+    {
+        icon: <Briefcase className="w-6 h-6 text-blue-400" />,
+        title: "Full Stack Developer (Remote)",
+        subtitle: "Freelance / Contract",
+        date: "2023 – Present",
+        description: "Developing and maintaining scalable web apps with Node.js, Express, MongoDB, React & Next.js for global clients."
+    },
+    {
+        icon: <CalendarDays className="w-6 h-6 text-green-400" />,
+        title: "First SaaS Launch",
+        subtitle: "AI + Payment Platform",
+        date: "2024",
+        description: "Building and launching innovative SaaS products integrating AI and secure payment systems."
+    }
 ]
 
 export default function Timeline() {
     return (
-        <section id="timeline" className="py-20 bg-gradient-to-b from-black via-zinc-900 to-black">
+        <section id="timeline" className="py-20 bg-gradient-to-b from-black via-zinc-900 to-black text-white">
             <div className="max-w-5xl mx-auto px-4">
                 <h2 className="text-4xl font-bold text-center mb-12">My Journey</h2>
                 <div className="relative border-l border-gray-700">
@@ -27,7 +52,9 @@ export default function Timeline() {
                                 {event.icon}
                             </span>
                             <h3 className="text-xl font-semibold">{event.title}</h3>
-                            <span className="block text-sm text-gray-400">{event.subtitle} • {event.date}</span>
+                            <span className="block text-sm text-gray-400">
+                                {event.subtitle} • {event.date}
+                            </span>
                             <p className="mt-2 text-gray-300">{event.description}</p>
                         </motion.div>
                     ))}
