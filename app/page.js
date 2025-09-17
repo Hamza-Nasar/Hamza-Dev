@@ -16,15 +16,15 @@ import Footer from "@/components/Footer";
 
 export default function Page() {
   useEffect(() => {
-    // Browser scroll restoration disable
+    
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
     }
 
-    // Scroll top on load
+    
     window.scrollTo({ top: 0, behavior: 'auto' });
 
-    // Welcome toast
+    
     toast.custom(
       (t) => (
         <div
@@ -40,7 +40,7 @@ export default function Page() {
       { duration: 2000 }
     );
 
-    // Goodbye toast on page unload
+    
     const handleBeforeUnload = (e) => {
       e.preventDefault();
       toast.custom(

@@ -13,7 +13,7 @@ export default function Contact() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        // do your backend call here if needed…
+        
         Swal.fire({
             icon: 'success',
             title: 'Message Sent!',
